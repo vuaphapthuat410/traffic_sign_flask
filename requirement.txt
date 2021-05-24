@@ -1,7 +1,0 @@
-tensorflow==2.4.1
-flask
-numpy
-utils
-opencv-python==4.2.0.32
-pandas
-efficientnet
