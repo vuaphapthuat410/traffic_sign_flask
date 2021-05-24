@@ -9,7 +9,7 @@ import os
 from flask import Flask, request
 # addition for this prj
 import cv2
-from efficientnet.tfkeras import EfficientNetB4
+import efficientnet.tfkeras
 import matplotlib.pyplot as plt
 import pandas as pd # data processing, CSV file I/O (e.g. pd.read_csv)
 import pickle
@@ -105,13 +105,16 @@ def classify():
             str2 = str(predict[1]);
 
             # Arrange the correct return according to the model.
-            return jsonify({
+            response = jsonify({
                 'method': 'POST',
                 'image_url': image_url,
                 'file_name': filename,
-                'label:': str1,
+                'label': str1,
                 'score' : str2
             })
+            # Enable Access-Control-Allow-Origin
+            response.headers.add("Access-Control-Allow-Origin", "*")
+            return response 
         else:
             return jsonify({
                 'message': 'Action is not defined!'
